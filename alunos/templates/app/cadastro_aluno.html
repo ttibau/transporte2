@@ -1,0 +1,224 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Novo Aluno {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+      <div class="">
+        <div class="page-title">
+          <div class="title_left">
+            <h3>Cadastros</h3>
+          </div>
+
+          <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">Go!</button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Cadastrar aluno</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+
+                <div class="row">
+
+                  <form action="{% url 'alunos:novo-aluno' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Nome completo</label>
+                        {{ form.nome }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                     <div class="form-group">
+                        <label>Número RG</label>
+                        {{ form.rg }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Título de eleitor</label>
+                        {{ form.titulo }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Número de CPF</label>
+                        {{ form.cpf }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Endereço de e-mail</label>
+                        {{ form.email }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>CEP</label>
+                        {{ form.cep }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-8 col-sm-12 col-xs-12 form-group">
+                     <div class="form-group">
+                        <label>Endereço completo</label>
+                        {{ form.endereco }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Bairro</label>
+                        {{ form.bairro }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                     <div class="form-group">
+                        <label>Telefone fixo</label>
+                        {{ form.telefone_fixo }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Telefone móvel</label>
+                        {{ form.telefone_movel }}
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Ragistro acadêmico (RA)</label>
+                        {{ form.registro_academico }}
+                      </div>
+                    </div>            
+
+                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Nome da instituição de ensino</label>
+                        {{ form.inst_ensino_nome }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Cidade da instituição de ensino</label>
+                        {{ form.inst_ensino_cicade }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Curso</label>
+                        {{ form.curso }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Duração do curso (anos)</label>
+                        {{ form.duracao_curso }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Turno</label>
+                        {{ form.turno }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Serviços</label>
+                        {{ form.servicos }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Situação da renovação</label>
+                        {{ form.situacao }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                     <div class="form-group">
+                        <label>Dias de utilização</label>
+                        {{ form.dias_utilizacao }}
+                      </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Mora com os pais?</label>
+                      
+                        {{ form.mora_com_pais }}
+                      </div>                     
+                    </div>
+
+                    <div class="col-md-3 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Tem Whatsapp?</label>
+                        {{ form.tem_whatsapp }}
+                      </div>
+                    </div>   
+                    
+                    <div class="col-md-3 col-sm-12 col-xs-12 form-group">
+                      <div class="form-group">
+                        <label>Semestre atual matriculado?</label>
+                        {{ form.semestre_matriculado }}
+                      </div>
+                    </div>
+
+                   <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                      </div>
+                    </div>
+                  
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+{% endblock javascripts %}
+

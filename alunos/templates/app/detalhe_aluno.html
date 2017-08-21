@@ -1,0 +1,307 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Plain Page {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+      <div class="">
+        <div class="page-title">
+          <div class="title_left">
+            <h3>Detalhes</h3>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Detalhes do aluno</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <div class="x_content">
+              <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                <div class="profile_img">
+                  <div id="crop-avatar">
+                    <!-- Current avatar -->
+                    {% if aluno.foto %}
+                    <img class="img-responsive avatar-view" src="{{aluno.foto.url}}" alt="Avatar" title="Imagem do aluno" style="width: 100%; max-width: 220px; height: 100%; max-height: 220px;">
+                    {% else %}
+                    <img class="img-responsive avatar-view" src="/static/images/sem_foto.png" alt="Avatar" title="Imagem do aluno" style="width: 100%; max-width: 220px; height: 100%; max-height: 220px;">
+                    {% endif %}
+                  </div>
+                </div>
+                <h3>{{aluno.nome}}</h3>
+
+                <ul class="list-unstyled user_data">
+                  <li><i class="fa fa-map-marker user-profile-icon"></i> {{aluno.endereco}}
+                  </li>
+
+                  <li>
+                    <i class="fa fa-question user-profile-icon"></i> Está ativo? {% if aluno.is_active %} <span class="fa fa-check"></span> {% else %} <span class="fa fa-close"></span> {% endif %}
+                  </li>
+
+                  <li class="m-top-xs">
+                    <i class="fa fa-mobile user-profile-icon"></i> {{aluno.telefone_movel}}
+                  </li>
+
+                  <li class="m-top-xs">
+                    <i class="fa fa-phone user-profile-icon"></i> {{aluno.telefone_fixo}}
+                  </li>
+                
+
+                <li class="m-top-xs">
+                    <i class="fa fa-envelope-o user-profile-icon"></i> {{aluno.email}}
+                  </li>
+                </ul>
+
+                <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> Editar Aluno</a>
+                <a href="" class="btn btn-primary"><i class="fa fa-plus m-right-xs"></i> Abrir chamado</a>
+                <br />
+
+                <!-- start skills 
+                <h4>Skills</h4>
+                <ul class="list-unstyled user_data">
+                  <li>
+                    <p>Web Applications</p>
+                    <div class="progress progress_sm">
+                      <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <p>Website Design</p>
+                    <div class="progress progress_sm">
+                      <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <p>Automation & Testing</p>
+                    <div class="progress progress_sm">
+                      <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <p>UI / UX</p>
+                    <div class="progress progress_sm">
+                      <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                    </div>
+                  </li>
+                </ul>
+                 end of skills -->
+
+              </div>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+
+                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                  <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Chamados</a>
+                    </li>
+                    <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Documentos</a>
+                    </li>
+                    <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Dados</a>
+                    </li>
+                    <li role="presentation" class=""><a href="#tab_content4" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Frequência</a>
+                    </li>
+                  </ul>
+                  <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+
+                      <!-- start recent activity -->
+                      <ul class="messages">
+                      {% for chamado in chamados %}
+                        <li>
+                          <img src="/static/images/img.jpg" class="avatar" alt="Avatar">
+                          <div class="message_date">
+                            <h3 class="date text-info">{{chamado.data.day}}</h3>
+                            <p class="month">Mês {{chamado.data.month}}</p>
+                            <p class="month">{{chamado.data.year}}</p>
+                            </div>
+                          <div class="message_wrapper">
+                            <h4 class="heading">{{chamado.usuario.first_name }} {{chamado.usuario.last_name}}</h4>
+                            <blockquote class="message">
+                              <p><strong><span class="fa fa-list"></span> Categoria: </strong>{{chamado.tipo}}</p>
+                              <p><strong><span class="fa fa-pencil"></span> Título: </strong> {{chamado.titulo}}</p>
+                              <p><strong><span class="fa fa-pencil-square-o"></span> Texto: </strong> {{chamado.texto}}</p>
+                            </blockquote>
+                          </div>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                      <!-- end recent activity -->
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+
+                      <!-- start user projects -->
+                      {% if documento_cpf %}
+                      {% for documento in documento_cpf %}
+                        <article class="media event">
+                        <a class="pull-left date">
+                          <p class="day">{{documento.data_inclusao.day}}</p>
+                          <p class="month">{{documento.data_inclusao|date:'F'}}</p>
+                          <p class="month">{{documento.data_inclusao|date:'Y'}}</p>
+                        </a>
+                        <div class="media-body">
+                          <a class="title" href="#">CPF {% if documento.is_valid %} <span class="label label-success">VALIDADO</span> {% else %} <span class="label label-warning">INVÁLIDO</span> {% endif %}</a>
+                          <p><strong> Nome do arquivo: </strong>{{documento.arquivo.name}}</p>
+                          <p><strong> Tamanho: </strong>{{documento.arquivo.size}} Bytes</p>
+                          <p>
+                            <span class="fa fa-eye blue"> <a href="{{documento.arquivo.url}}" target="_blank"> VER </a></span> | 
+                            {% if documento.is_valid == False %}
+                            <span class="fa fa-check green"> <a href="<span id=""></span>"> VALIDAR </a></span> | 
+                            {% else %}
+                            <span class="fa fa-times warning"><a href="#"> INVALIDAR </a></span> |
+                            {% endif %}
+                            <span class="fa fa-trash red"><a href="#"> EXCLUIR </a></span>
+                          </p>
+                        </div>
+                      </article>
+                      {% endfor %}
+                      {% endif %}
+                      {% if documento_rg %}
+                      {% for documento in documento_rg %}
+                        <article class="media event">
+                        <a class="pull-left date">
+                          <p class="day">{{documento.data_inclusao.day}}</p>
+                          <p class="month">{{documento.data_inclusao|date:'F'}}</p>
+                          <p class="month">{{documento.data_inclusao|date:'Y'}}</p>
+                        </a>
+                        <div class="media-body">
+                          <a class="title" href="#">Identidade (RG) {% if documento.is_valid %} <span class="label label-success">VALIDADO</span> {% else %} <span class="label label-warning">INVÁLIDO</span> {% endif %}</a>
+                          <p><strong> Nome do arquivo: </strong>{{documento.arquivo.name}}</p>
+                          <p><strong> Tamanho: </strong>{{documento.arquivo.size}} Bytes</p>
+                          <p>
+                            <span class="fa fa-eye blue"> <a href="{{documento.arquivo.url}}" target="_blank"> VER </a></span> | 
+                            {% if documento.is_valid == False %}
+                            <span class="fa fa-check green"> <a href="#"> VALIDAR </a></span> | 
+                            {% else %}
+                            <span class="fa fa-times warning"><a href="#"> INVALIDAR </a></span> |
+                            {% endif %}
+                            <span class="fa fa-trash red"><a href="#"> EXCLUIR </a></span>
+                          </p>
+                        </div>
+                      </article>
+                      {% endfor %}
+                      {% endif %}
+                      <!-- end user projects -->
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                      <p>
+                        <ul style="list-style-type: none;">
+                          <h4>
+                            <p><li><strong><span class="fa fa-user"></span> Nome completo: </strong> {{aluno.nome}}</li></p>
+                            <p><li><strong><span class="fa fa-list-ol"></span> Nº RG: </strong> {{aluno.rg}}</li></p>
+                            <p><li><strong><span class="fa fa-list-ol"></span> Nº Título de Eleitor: </strong> {{aluno.titulo}}</li></p>
+                            <p><li><strong><span class="fa fa-list-ol"></span> Nº CPF: </strong> {{aluno.cpf}}</li></p>
+                            <p><li><strong><span class="fa fa-envelope"></span> Email: </strong> {{aluno.email}}</li></p>
+                            <p><li><strong><span class="fa fa-globe"></span> CEP: </strong> {{aluno.cep}}</li></p>
+                            <p><li><strong><span class="fa fa-map-marker"></span> Endereço: </strong> {{aluno.endereco}}</li></p>
+                            <p><li><strong><span class="fa fa-location-arrow"></span> Bairro: </strong> {{aluno.bairro}}</li></p>
+                            <p><li><strong><span class="fa fa-phone"></span> Telefone fixo: </strong> {{aluno.telefone_fixo}}</li></p>
+                            <p><li><strong><span class="fa fa-mobile"></span> Telefone móvel: </strong> {{aluno.telefone_movel}}</li></p>
+                            <p><li><strong><span class="fa fa-user"></span> Registro Acadêmico (RA): </strong> {{aluno.registro_academico}}</li></p>
+                            <p><li><strong><span class="fa fa-registered"></span> Instituição de Ensino: </strong> {{aluno.inst_ensino_nome}}</li></p>
+                            <p><li><strong><span class="fa fa-square"></span> Cidade da Instituição: </strong> {{aluno.inst_ensino_cicade}}</li></p>
+                            <p><li><strong><span class="fa fa-trophy"></span> Curso: </strong> {{aluno.curso}}</li></p>
+                            <p><li><strong><span class="fa fa-clock-o"></span> Duração do curso: </strong> {{aluno.duracao_curso}} Anos</li></p>
+                            <p><li><strong><span class="fa fa-sun-o"></span> Turno: </strong> {{turno_nome}}</li></p> <!-- FAZER VERIFICAÇÃO -->
+                            <p><li><strong><span class="fa fa-server"></span> Serviço(s): </strong> {{aluno.servicos}}</li></p>
+                            <p><li><strong><span class="fa fa-calendar-o"></span> Dias de utilização: </strong> {% for dia in dias_utilizacao %} {{dia}} - {% endfor %}</li></p>
+                            <p><li><strong><span class="fa fa-question"></span> Está ativo?: </strong> {% if aluno.is_active %} <span class="green fa fa-thumbs-up"></span> {% else %} <span class="red fa fa-thumbs-down"></span>{% endif %}</li></p>
+                            <p><li><strong><span class="fa fa-whatsapp"></span> Tem Whatsapp?: </strong> {% if aluno.tem_whatsapp %} <span class="green fa fa-thumbs-up"></span> {% else %} <span class="red fa fa-thumbs-down"></span>{% endif %}</li></p>
+                            <p><li><strong><span class="fa fa-question-circle-o"></span> Mora com os pais?: </strong> {% if aluno.mora_com_pais %} <span class="green fa fa-thumbs-up"></span> {% else %} <span class="red fa fa-thumbs-down"></span>{% endif %}</li></p>
+                            <p><li><strong><span class="fa fa-question-circle"></span> Semestre atual matriculado?: </strong> {% if aluno.semestre_matriculado %} <span class="green fa fa-thumbs-up"></span> {% else %} <span class="red fa fa-thumbs-down"></span>{% endif %}</li></p>
+                          </h4>
+                        </ul>
+                      </p>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
+
+                      <!-- FREQUENCIA -->
+                      <table class="data table table-striped no-margin">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Project Name</th>
+                            <th>Client Company</th>
+                            <th class="hidden-phone">Hours Spent</th>
+                            <th>Contribution</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>New Company Takeover Review</td>
+                            <td>Deveint Inc</td>
+                            <td class="hidden-phone">18</td>
+                            <td class="vertical-align-mid">
+                              <div class="progress">
+                                <div class="progress-bar progress-bar-success" data-transitiongoal="35"></div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>New Partner Contracts Consultanci</td>
+                            <td>Deveint Inc</td>
+                            <td class="hidden-phone">13</td>
+                            <td class="vertical-align-mid">
+                              <div class="progress">
+                                <div class="progress-bar progress-bar-danger" data-transitiongoal="15"></div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>Partners and Inverstors report</td>
+                            <td>Deveint Inc</td>
+                            <td class="hidden-phone">30</td>
+                            <td class="vertical-align-mid">
+                              <div class="progress">
+                                <div class="progress-bar progress-bar-success" data-transitiongoal="45"></div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>New Company Takeover Review</td>
+                            <td>Deveint Inc</td>
+                            <td class="hidden-phone">28</td>
+                            <td class="vertical-align-mid">
+                              <div class="progress">
+                                <div class="progress-bar progress-bar-success" data-transitiongoal="75"></div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- end user projects -->
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+{% endblock javascripts %}
+

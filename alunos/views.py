@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -13,6 +13,14 @@ from .forms import AlunoForm, ChamadoForm
 from django.views import View
 # Create your views here.
 
+
+def valida_documento(request, doc_id):
+	print doc_id
+	documento = DocumentoCPF.objects.filter(pk=doc_id)
+	for doc in documento:
+		doc.is_valid = True
+		doc.save()
+	return HttpResponse("ok")
 
 @login_required
 def index(request):
@@ -98,14 +106,5 @@ class AlunoDelete(DeleteView):
 
 	def get(self, *args, **kwargs):
 		return self.post(*args, **kwargs)
-
-
-class ValidaDocumentoCPF(View):
-
-	def post(self, request):
-		form = self.form_class(request.POST)
-		if form.is_valid():
-			cpf = DocumentoCPF.objects.filter(id=request.POST['id'])
-			print cpf
 
 

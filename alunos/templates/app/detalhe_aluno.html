@@ -144,23 +144,28 @@
 
                       <!-- start user projects -->
                       {% if documento_cpf %}
-                      {% for documento in documento_cpf %}
+                      {% for cpf in documento_cpf %}
                         <article class="media event">
                         <a class="pull-left date">
-                          <p class="day">{{documento.data_inclusao.day}}</p>
-                          <p class="month">{{documento.data_inclusao|date:'F'}}</p>
-                          <p class="month">{{documento.data_inclusao|date:'Y'}}</p>
+                          <p class="day">{{cpf.data_inclusao.day}}</p>
+                          <p class="month">{{cpf.data_inclusao|date:'F'}}</p>
+                          <p class="month">{{cpf.data_inclusao|date:'Y'}}</p>
                         </a>
                         <div class="media-body">
-                          <a class="title" href="#">CPF {% if documento.is_valid %} <span class="label label-success">VALIDADO</span> {% else %} <span class="label label-warning">INVÁLIDO</span> {% endif %}</a>
-                          <p><strong> Nome do arquivo: </strong>{{documento.arquivo.name}}</p>
-                          <p><strong> Tamanho: </strong>{{documento.arquivo.size}} Bytes</p>
+                          <a class="title" href="#">CPF {% if cpf.is_valid %} <span class="label label-success">VALIDADO</span> {% else %} <span class="label label-warning">INVÁLIDO</span> {% endif %}</a>
+                          <p><strong> Nome do arquivo: </strong>{{cpf.arquivo.name}}</p>
+                          <p><strong> Tamanho: </strong>{{cpf.arquivo.size}} Bytes</p>
                           <p>
-                            <span class="fa fa-eye blue"> <a href="{{documento.arquivo.url}}" target="_blank"> VER </a></span> | 
-                            {% if documento.is_valid == False %}
-                            <span class="fa fa-check green"> <a href="<span id=""></span>"> VALIDAR </a></span> | 
+                            <span class="fa fa-eye blue"> <a href="{{cpf.arquivo.url}}" target="_blank"> VER </a></span> 
+                            {% if cpf.is_valid == False %}
+                            <form action="{% url 'alunos:valida-cpf' cpf.id %}" method="post" id="valida_cpf">
+                            {% csrf_token %}
+                              <span class="fa fa-check green"> 
+                                <button type="submit" class="btn btn-success btn-xs"></span> VALIDAR </button>
+                              </span> 
+                            </form>
                             {% else %}
-                            <span class="fa fa-times warning"><a href="#"> INVALIDAR </a></span> |
+                            <span class="fa fa-times warning"><a href="#"> INVALIDAR </a></span> 
                             {% endif %}
                             <span class="fa fa-trash red"><a href="#"> EXCLUIR </a></span>
                           </p>
@@ -183,7 +188,8 @@
                           <p>
                             <span class="fa fa-eye blue"> <a href="{{documento.arquivo.url}}" target="_blank"> VER </a></span> | 
                             {% if documento.is_valid == False %}
-                            <span class="fa fa-check green"> <a href="#"> VALIDAR </a></span> | 
+                            <form action="" method="post" id="valida_rg">
+                            <span class="fa fa-check green"> <a type="submit"> VALIDAR </a></span> | </form> 
                             {% else %}
                             <span class="fa fa-times warning"><a href="#"> INVALIDAR </a></span> |
                             {% endif %}
@@ -299,9 +305,13 @@
         </div>
       </div>
     </div>
+
+
+
 {% endblock content %}
 
 {% block javascripts %}
   {{ block.super }}
 {% endblock javascripts %}
+
 

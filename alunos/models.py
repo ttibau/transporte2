@@ -121,6 +121,9 @@ class DocumentoCPF(models.Model):
     def __str__(self):
         return self.aluno.nome
 
+    def __unicode__(self):
+        return self.aluno.nome
+
     class Meta:
         verbose_name = 'Documentação CPF'
         verbose_name_plural = 'Documentos - CPF'

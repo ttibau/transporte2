@@ -158,7 +158,7 @@
                           <p>
                             <span class="fa fa-eye blue"> <a href="{{cpf.arquivo.url}}" target="_blank"> VER </a></span> 
                             {% if cpf.is_valid == False %}
-                            <form action="{% url 'alunos:valida-cpf' cpf.id %}" method="post" id="valida_cpf">
+                            <form action="{% url 'alunos:valida-cpf' 'DocumentoCPF' cpf.id %}" method="post" id="valida_cpf">
                             {% csrf_token %}
                               <span class="fa fa-check green"> 
                                 <button type="submit" class="btn btn-success btn-xs"></span> VALIDAR </button>

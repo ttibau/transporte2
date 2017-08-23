@@ -14,13 +14,16 @@ from django.views import View
 # Create your views here.
 
 
-def valida_documento(request, doc_id):
-	print doc_id
-	documento = DocumentoCPF.objects.filter(pk=doc_id)
+def valida_documento(request, documentoTipo, doc_id):
+	print type(documentoTipo)
+	tipo = eval(documentoTipo.encode('utf8'))
+
+	documento_id = int(doc_id)
+	documento = tipo.objects.filter(pk=documento_id)
 	for doc in documento:
 		doc.is_valid = True
 		doc.save()
-	return HttpResponse("ok")
+	return redirect('/index')
 
 @login_required
 def index(request):

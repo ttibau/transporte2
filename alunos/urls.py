@@ -8,9 +8,8 @@ urlpatterns = [
 	url(r'^logout', views.do_logout, name= 'logout'),
 	url(r'^novo-aluno', login_required(views.NovoAluno.as_view(success_url='/index')), name= 'novo-aluno'),
 	url(r'^novo-chamado', login_required(views.NovoChamado.as_view(success_url='/index')), name= 'novo-chamado'),
-	url(r'^(?P<pk>[-\w]+)/$', login_required(views.AlunoView.as_view()), name='aluno-detalhe'),
+	url(r'^aluno/(?P<pk>[-\w]+)/$', login_required(views.AlunoView.as_view()), name='aluno-detalhe'),
 	url(r'^(?P<pk>[-\w]+)/delete$', login_required(views.AlunoDelete.as_view()), name='aluno-delete'),
-	url(r'^documento/(?P<documentoTipo>[\w\.%+-]+)/(?P<doc_id>\w+)/$', views.valida_documento, name='valida-cpf'),
-
-	
+	url(r'^documento/(?P<documentoTipo>[\w\.%+-]+)/(?P<doc_id>\w+)/(?P<bool>\w+)/$', views.modifica_documento, name='modifica-documento'),
+	url(r'^(?P<pk>[-\w]+)/update$', login_required(views.AlunoUpdate.as_view(success_url='/index')), name='aluno-update'),
 ]

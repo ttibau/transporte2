@@ -65,7 +65,7 @@
                   </li>
                 </ul>
 
-                <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> Editar Aluno</a>
+                <a class="btn btn-success" href="{% url 'alunos:aluno-update' aluno.id %}"><i class="fa fa-edit m-right-xs"></i> Editar Aluno</a>
                 <a href="" class="btn btn-primary"><i class="fa fa-plus m-right-xs"></i> Abrir chamado</a>
                 <br />
 
@@ -158,14 +158,13 @@
                           <p>
                             <span class="fa fa-eye blue"> <a href="{{cpf.arquivo.url}}" target="_blank"> VER </a></span> 
                             {% if cpf.is_valid == False %}
-                            <form action="{% url 'alunos:valida-cpf' 'DocumentoCPF' cpf.id %}" method="post" id="valida_cpf">
-                            {% csrf_token %}
-                              <span class="fa fa-check green"> 
-                                <button type="submit" class="btn btn-success btn-xs"></span> VALIDAR </button>
-                              </span> 
+                              <span class="fa fa-check green"> </span>
+                                <a href="{% url 'alunos:modifica-documento' 'DocumentoCPF' cpf.id  True %}" > VALIDAR </a>
                             </form>
                             {% else %}
-                            <span class="fa fa-times warning"><a href="#"> INVALIDAR </a></span> 
+                              <span class="fa fa-times warning"></span> 
+                              <a  href="{% url 'alunos:modifica-documento' 'DocumentoCPF' cpf.id False %}" > INVALIDAR </a>
+                            </form>
                             {% endif %}
                             <span class="fa fa-trash red"><a href="#"> EXCLUIR </a></span>
                           </p>

@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Aluno, Chamado, DiasSemana, DocumentoCPF, DocumentoRG
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
 from django.core.urlresolvers import reverse_lazy
 from .forms import AlunoForm, ChamadoForm
@@ -14,16 +14,27 @@ from django.views import View
 # Create your views here.
 
 
-def valida_documento(request, documentoTipo, doc_id):
-	print type(documentoTipo)
+class AlunoUpdate(UpdateView):
+	model = Aluno
+	template_name = 'app/update_aluno.html'
+	form_class = AlunoForm
+
+
+""" 
+	Método que vai modificar o status do documento
+"""
+@login_required
+def modifica_documento(request, documentoTipo, doc_id, bool):
+	print bool
 	tipo = eval(documentoTipo.encode('utf8'))
 
 	documento_id = int(doc_id)
 	documento = tipo.objects.filter(pk=documento_id)
 	for doc in documento:
-		doc.is_valid = True
+		doc.is_valid = bool
 		doc.save()
 	return redirect('/index')
+
 
 @login_required
 def index(request):

@@ -1,5 +1,5 @@
 media/*
 .idea/*
 *.pyc
-.sqlite3
+*.sqlite3
 .env

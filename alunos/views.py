@@ -38,7 +38,7 @@ def apaga_aluno(request, aluno_id):
 """
 @login_required
 def modifica_documento(request, documentoTipo, doc_id, bool):
-	print bool
+	print (bool)
 	tipo = eval(documentoTipo.encode('utf8'))
 
 	documento_id = int(doc_id)

@@ -11,7 +11,7 @@ class AlunoForm(forms.ModelForm):
 			'nome', 'rg', 'titulo', 'cpf', 'email', 'cep', 'endereco', 'bairro', 'mora_com_pais',
 			'telefone_fixo', 'telefone_movel', 'registro_academico', 'tem_whatsapp', 'inst_ensino_nome',
 			'inst_ensino_cicade', 'curso', 'duracao_curso', 'semestre_matriculado', 'turno', 'servicos',
-			'situacao', 'dias_utilizacao'
+			'situacao', 'dias_utilizacao', 'foto'
 		]
 		widgets = {
 			'nome' : forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'Nome completo'}),
@@ -28,7 +28,7 @@ class AlunoForm(forms.ModelForm):
 			'registro_academico' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Registro acadêmico'}),
 			'tem_whatsapp' : forms.CheckboxInput(attrs={'class' : 'form-control flat'}),
 			'inst_ensino_nome' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Instituição de ensino'}),
-			'inst_ensino_cicade' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Cidade da instituição de ensino'}),
+			'inst_ensino_cicade' : forms.Select(attrs={'class' : 'form-control'}),
 			'curso' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Curso'}),
 			'duracao_curso' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Duração do curso (anos)'}),
 			'semestre_matriculado' : forms.CheckboxInput(attrs={'class' : 'form-control flat'}),
@@ -36,7 +36,7 @@ class AlunoForm(forms.ModelForm):
 			'servicos' : forms.Select(attrs={'class' : 'form-control'}),
             'situacao' : forms.Select(attrs={'class' : 'form-control'}),
             'dias_utilizacao' : forms.CheckboxSelectMultiple(attrs={'class' : 'form-control flat'}),
-            
+            'foto' : forms.FileInput()
 		}
 
 

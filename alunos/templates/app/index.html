@@ -111,7 +111,7 @@
                           <td>
                             <a href="{% url 'alunos:aluno-detalhe' aluno.id %}" ><span class="fa fa-eye"></span></a> |
                             <a href="{% url 'alunos:aluno-update' aluno.id %} "><span class="fa fa-edit"></span></a> |
-                            <a  href="{% url 'alunos:aluno-delete' aluno.id %}"><i class="fa fa-trash"></i></a>
+                            <a  href="{% url 'alunos:apaga-aluno' aluno.id %}"><i class="fa fa-trash"></i></a>
                           </td>
                         </tr>
                         {% endif %}

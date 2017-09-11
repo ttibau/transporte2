@@ -22,6 +22,13 @@ class DiasSemana(models.Model):
         return self.nome.encode('utf-8')
 
 
+class Cidade(models.Model):
+    nome = models.CharField('Cidade', max_length=25)
+
+    def __str__(self):
+        return self.nome.encode('utf-8')
+
+
 class Aluno(models.Model):
 
     TURNO_CHOICES = (
@@ -70,7 +77,7 @@ class Aluno(models.Model):
     registro_academico = models.CharField('Registro Acadêmico', max_length=20)
     tem_whatsapp = models.BooleanField('Tem Whatsapp?')
     inst_ensino_nome = models.CharField('Instituição de ensino', max_length=30)
-    inst_ensino_cicade = models.CharField('Cidade da instituição', max_length=10)
+    inst_ensino_cicade = models.ForeignKey(Cidade)
     curso = models.CharField('Curso', max_length=25)
     duracao_curso = models.IntegerField('Duração do curso (Anos)')
     semestre_matriculado = models.BooleanField('Semestre atual matriculado')

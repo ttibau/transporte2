@@ -12,4 +12,5 @@ urlpatterns = [
 	url(r'^(?P<pk>[-\w]+)/delete$', login_required(views.AlunoDelete.as_view()), name='aluno-delete'),
 	url(r'^documento/(?P<documentoTipo>[\w\.%+-]+)/(?P<doc_id>\w+)/(?P<bool>\w+)/$', views.modifica_documento, name='modifica-documento'),
 	url(r'^(?P<pk>[-\w]+)/update$', login_required(views.AlunoUpdate.as_view(success_url='/index')), name='aluno-update'),
+	url(r'^(?P<aluno_id>\w+)/apagar/$', views.apaga_aluno, name='apaga-aluno'),
 ]

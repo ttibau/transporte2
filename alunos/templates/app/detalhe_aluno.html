@@ -56,7 +56,7 @@
                   </li>
 
                   <li class="m-top-xs">
-                    <i class="fa fa-phone user-profile-icon"></i> {{aluno.telefone_fixo}}
+                    <i class="fa fa-phone user-profile-icon"></i> {{aluno.curso}}
                   </li>
                 
 
@@ -173,22 +173,21 @@
                       {% endfor %}
                       {% endif %}
                       {% if documento_rg %}
-                      {% for documento in documento_rg %}
+                      {% for rg in documento_rg %}
                         <article class="media event">
                         <a class="pull-left date">
-                          <p class="day">{{documento.data_inclusao.day}}</p>
-                          <p class="month">{{documento.data_inclusao|date:'F'}}</p>
-                          <p class="month">{{documento.data_inclusao|date:'Y'}}</p>
+                          <p class="day">{{rg.data_inclusao.day}}</p>
+                          <p class="month">{{rg.data_inclusao|date:'F'}}</p>
+                          <p class="month">{{rg.data_inclusao|date:'Y'}}</p>
                         </a>
                         <div class="media-body">
-                          <a class="title" href="#">Identidade (RG) {% if documento.is_valid %} <span class="label label-success">VALIDADO</span> {% else %} <span class="label label-warning">INVÁLIDO</span> {% endif %}</a>
-                          <p><strong> Nome do arquivo: </strong>{{documento.arquivo.name}}</p>
-                          <p><strong> Tamanho: </strong>{{documento.arquivo.size}} Bytes</p>
+                          <a class="title" href="#">Identidade (RG) {% if rg.is_valid %} <span class="label label-success">VALIDADO</span> {% else %} <span class="label label-warning">INVÁLIDO</span> {% endif %}</a>
+                          <p><strong> Nome do arquivo: </strong>{{rg.arquivo.name}}</p>
+                          <p><strong> Tamanho: </strong>{{rg.arquivo.size}} Bytes</p>
                           <p>
-                            <span class="fa fa-eye blue"> <a href="{{documento.arquivo.url}}" target="_blank"> VER </a></span> | 
-                            {% if documento.is_valid == False %}
-                            <form action="" method="post" id="valida_rg">
-                            <span class="fa fa-check green"> <a type="submit"> VALIDAR </a></span> | </form> 
+                            <span class="fa fa-eye blue"> <a href="{{rg.arquivo.url}}" target="_blank"> VER </a></span> | 
+                            {% if rg.is_valid == False %}
+                            <span class="fa fa-check green"> <a href="{% url 'alunos:modifica-documento' 'DocumentoRG' rg.id True %}"> VALIDAR </a></span> |  
                             {% else %}
                             <span class="fa fa-times warning"><a href="#"> INVALIDAR </a></span> |
                             {% endif %}

@@ -20,6 +20,19 @@ class AlunoUpdate(UpdateView):
 	form_class = AlunoForm
 
 
+"""
+	Método que vai colocar o is_active do aluno para false
+"""
+@login_required
+def apaga_aluno(request, aluno_id):
+	aluno = Aluno.objects.filter(pk=aluno_id)
+	print (aluno)
+	for field in aluno:
+		field.is_active = False
+		field.save()
+	return redirect('/index')
+
+
 """ 
 	Método que vai modificar o status do documento
 """
